@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "TypingClub: lanzar script una vez",
+  "version": "1.2.0",
+  "description": "Al pulsar el icono, se despliega una barra para elegir el nivel de velocidad; al escogerlo, se ejecuta una sola vez el script en el marco de la página que contiene el teclado de la lección.",
+  "minimum_chrome_version": "111",
+  "permissions": ["scripting", "storage"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Elegir velocidad y ejecutar TypingClub",
+    "default_popup": "velocidad.html"
+  }
+}

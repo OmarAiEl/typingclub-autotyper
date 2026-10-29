@@ -1,0 +1,134 @@
+:root {
+  --bg: #15171c;
+  --panel: #1d2027;
+  --borde: #3a3f4b;
+  --texto: #e7e9ee;
+  --texto-tenue: #9aa0ad;
+
+  --c-bajo: #3ddc73;
+  --c-medio: #e3d12b;
+  --c-alto: #ff8a2b;
+  --c-sobrehumano: #ff2b4e;
+}
+
+* { box-sizing: border-box; }
+
+/* Es el popup real del icono (action.default_popup): Chrome ajusta el
+   tamaño de la ventana al contenido, así que el ancho hay que fijarlo aquí. */
+body {
+  margin: 0;
+  width: 300px;
+  padding: 18px 16px 16px;
+  background: var(--bg);
+  color: var(--texto);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+
+h1 {
+  font-size: 15px;
+  margin: 0;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.subtitulo {
+  margin: 0 0 14px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--texto-tenue);
+}
+
+/* Barra tipo "barra de vida" de videojuego: 4 segmentos recortados en diagonal */
+.barra {
+  display: flex;
+  gap: 3px;
+  height: 46px;
+  padding: 4px;
+  background: #0b0c10;
+  border: 2px solid var(--borde);
+  border-radius: 6px;
+}
+
+.segmento {
+  flex: 1;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  color: #0b0c10;
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+  opacity: 0.35;
+  filter: saturate(0.5);
+  transform: scaleY(0.82);
+  transition: opacity 0.15s ease, transform 0.15s ease, filter 0.15s ease;
+}
+
+.segmento:hover { opacity: 0.7; }
+
+.segmento.activo {
+  opacity: 1;
+  filter: saturate(1) drop-shadow(0 0 6px currentColor);
+  transform: scaleY(1);
+}
+
+.seg-bajo        { background: var(--c-bajo);        color: var(--c-bajo); }
+.seg-medio       { background: var(--c-medio);       color: var(--c-medio); }
+.seg-alto        { background: var(--c-alto);        color: var(--c-alto); }
+.seg-sobrehumano { background: var(--c-sobrehumano); color: var(--c-sobrehumano); }
+
+.segmento .nombre {
+  position: relative;
+  z-index: 1;
+  color: #0b0c10;
+  mix-blend-mode: normal;
+}
+
+.seg-sobrehumano.activo {
+  animation: pulso 0.9s ease-in-out infinite;
+}
+
+/* Breve destello al hacer clic, justo antes de que la barra se cierre
+   y se lance el script. */
+.segmento.pulsando {
+  filter: brightness(1.6) saturate(1) drop-shadow(0 0 10px currentColor);
+}
+
+@keyframes pulso {
+  0%, 100% { filter: saturate(1) drop-shadow(0 0 6px currentColor); }
+  50%      { filter: saturate(1) drop-shadow(0 0 14px currentColor); }
+}
+
+.ficha {
+  margin-top: 16px;
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 6px;
+  min-height: 64px;
+}
+
+.ficha-titulo {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ficha-rango {
+  margin-top: 2px;
+  font-size: 11px;
+  color: var(--texto-tenue);
+  font-variant-numeric: tabular-nums;
+}
+
+.ficha-desc {
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: var(--texto-tenue);
+  line-height: 1.4;
+}
